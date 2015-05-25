@@ -1,0 +1,63 @@
+armour:
+  helmet:
+    leather: 0
+    chain: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+  chestplate:
+    leather: 0
+    chain: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+  leggings:
+    leather: 0
+    chain: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+  boots:
+    leather: 0
+    chain: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+weapons:
+  bow: 0
+  wood-sword: 0
+  stone-sword: 0
+  gold-sword: 0
+  iron-sword: 0
+  diamond-sword: 0
+tools:
+  pickaxe:
+    wood: 0
+    stone: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+  axe:
+    wood: 0
+    stone: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+  shovel:
+    wood: 0
+    stone: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+  hoe:
+    wood: 0
+    stone: 0
+    gold: 0
+    iron: 0
+    diamond: 0
+others:
+  enchantment-table: 0
+  crafting-table: 0
+  anvil: 0
+  brewing_stand: 0
+  furnace: 0

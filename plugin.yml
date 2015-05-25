@@ -1,0 +1,4 @@
+name: ItemControl
+main: me.ecminer.itemcontrol.ItemControl
+version: 1
+depend: [McCombatLevel]
