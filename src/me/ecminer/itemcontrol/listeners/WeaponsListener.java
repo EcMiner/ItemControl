@@ -46,7 +46,7 @@ public class WeaponsListener implements Listener {
 
 	@EventHandler
 	public void onProjectileLaunch(ProjectileLaunchEvent evt) {
-		if (evt.getEntity() instanceof Player) {
+		if (evt.getEntity() instanceof Arrow && ((Arrow) evt.getEntity()).getShooter() instanceof Player) {
 			Player player = (Player) ((Arrow) evt.getEntity()).getShooter();
 			if (!player.hasPermission("itemcontrol.exempt"))
 				if (plugin.getSettings().getLevel(Material.BOW) > plugin.getMcCombatLevel().getCombatLevel(player)) {
@@ -64,6 +64,7 @@ public class WeaponsListener implements Listener {
 				if (plugin.getSettings().getLevel(Material.BOW) > plugin.getMcCombatLevel().getCombatLevel(player)) {
 					evt.setCancelled(true);
 					plugin.getSettings().sendCancelledWeapon(player, evt.getItem().getType());
+					player.updateInventory();
 				}
 			}
 	}

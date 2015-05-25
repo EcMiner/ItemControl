@@ -81,17 +81,18 @@ public class Settings {
 		levels.put("brewing_stand", config.getInt("others.brewing-table"));
 		levels.put("furnace", config.getInt("others.furnace"));
 
-		if (config.isSet("cancelled-armour")) {
-			cancelled_armour = config.getString("cancelled-armour");
+		System.out.println("!!!!!:" + messages.getString("cancelled-armour"));
+		if (messages.isSet("cancelled-armour")) {
+			cancelled_armour = messages.getString("cancelled-armour");
 		}
-		if (config.isSet("cancelled-tool")) {
-			cancelled_tool = config.getString("cancelled-tool");
+		if (messages.isSet("cancelled-tool")) {
+			cancelled_tool = messages.getString("cancelled-tool");
 		}
-		if (config.isSet("cancelled-weapon")) {
-			cancelled_weapon = config.getString("cancelled-weapon");
+		if (messages.isSet("cancelled-weapon")) {
+			cancelled_weapon = messages.getString("cancelled-weapon");
 		}
-		if (config.isSet("cancelled-others")) {
-			cancelled_others = config.getString("cancelled-others");
+		if (messages.isSet("cancelled-others")) {
+			cancelled_others = messages.getString("cancelled-others");
 		}
 	}
 
