@@ -105,33 +105,36 @@ public class ArmourListener implements Listener {
 
 	public void checkInventory(Player player) {
 		PlayerInventory inv = player.getInventory();
-		if (inv.getHelmet() != null) {
-			if (plugin.getSettings().getLevel(inv.getHelmet().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
-				plugin.getSettings().sendCancelledArmour(player, inv.getHelmet().getType());
-				plugin.addItemToInventory(player, inv.getHelmet());
-				inv.setHelmet(null);
+		try {
+			if (inv.getHelmet() != null) {
+				if (plugin.getSettings().getLevel(inv.getHelmet().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
+					plugin.getSettings().sendCancelledArmour(player, inv.getHelmet().getType());
+					plugin.addItemToInventory(player, inv.getHelmet());
+					inv.setHelmet(null);
+				}
 			}
-		}
-		if (inv.getChestplate() != null) {
-			if (plugin.getSettings().getLevel(inv.getChestplate().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
-				plugin.getSettings().sendCancelledArmour(player, inv.getChestplate().getType());
-				plugin.addItemToInventory(player, inv.getChestplate());
-				inv.setChestplate(null);
+			if (inv.getChestplate() != null) {
+				if (plugin.getSettings().getLevel(inv.getChestplate().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
+					plugin.getSettings().sendCancelledArmour(player, inv.getChestplate().getType());
+					plugin.addItemToInventory(player, inv.getChestplate());
+					inv.setChestplate(null);
+				}
 			}
-		}
-		if (inv.getLeggings() != null) {
-			if (plugin.getSettings().getLevel(inv.getLeggings().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
-				plugin.getSettings().sendCancelledArmour(player, inv.getLeggings().getType());
-				plugin.addItemToInventory(player, inv.getLeggings());
-				inv.setLeggings(null);
+			if (inv.getLeggings() != null) {
+				if (plugin.getSettings().getLevel(inv.getLeggings().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
+					plugin.getSettings().sendCancelledArmour(player, inv.getLeggings().getType());
+					plugin.addItemToInventory(player, inv.getLeggings());
+					inv.setLeggings(null);
+				}
 			}
-		}
-		if (inv.getBoots() != null) {
-			if (plugin.getSettings().getLevel(inv.getBoots().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
-				plugin.getSettings().sendCancelledArmour(player, inv.getBoots().getType());
-				plugin.addItemToInventory(player, inv.getBoots());
-				inv.setBoots(null);
+			if (inv.getBoots() != null) {
+				if (plugin.getSettings().getLevel(inv.getBoots().getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
+					plugin.getSettings().sendCancelledArmour(player, inv.getBoots().getType());
+					plugin.addItemToInventory(player, inv.getBoots());
+					inv.setBoots(null);
+				}
 			}
+		} catch (Exception e) {
 		}
 	}
 

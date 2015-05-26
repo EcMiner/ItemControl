@@ -25,9 +25,12 @@ public class OthersListener implements Listener {
 			if (evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				Block b = evt.getClickedBlock();
 				if (isOther(b)) {
-					if (plugin.getSettings().getLevel(b.getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
-						evt.setCancelled(true);
-						plugin.getSettings().sendCancelledOthers(player, b.getType());
+					try {
+						if (plugin.getSettings().getLevel(b.getType()) > plugin.getMcCombatLevel().getCombatLevel(player)) {
+							evt.setCancelled(true);
+							plugin.getSettings().sendCancelledOthers(player, b.getType());
+						}
+					} catch (Exception e) {
 					}
 				}
 			}
