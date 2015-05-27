@@ -78,7 +78,7 @@ public class Settings {
 
 			levels.put("enchantment_table", config.getInt("others.enchantment-table"));
 			levels.put("workbench", config.getInt("others.crafting-table"));
-			levels.put("anvil", config.getInt("others.enchantment-table"));
+			levels.put("anvil", config.getInt("others.anvil"));
 			levels.put(Material.BREWING_STAND.name().toLowerCase(), config.getInt("others.brewing_stand"));
 			levels.put("furnace", config.getInt("others.furnace"));
 
