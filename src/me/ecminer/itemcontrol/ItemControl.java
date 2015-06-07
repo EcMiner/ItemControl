@@ -3,6 +3,7 @@ package me.ecminer.itemcontrol;
 import java.io.File;
 
 import me.ecminer.itemcontrol.listeners.ArmourListener;
+import me.ecminer.itemcontrol.listeners.LevelListener;
 import me.ecminer.itemcontrol.listeners.OthersListener;
 import me.ecminer.itemcontrol.listeners.ToolsListener;
 import me.ecminer.itemcontrol.listeners.WeaponsListener;
@@ -37,6 +38,7 @@ public class ItemControl extends JavaPlugin {
 		pm.registerEvents(new OthersListener(this), this);
 		pm.registerEvents(new ToolsListener(this), this);
 		pm.registerEvents(new WeaponsListener(this), this);
+		pm.registerEvents(new LevelListener(this), this);
 	}
 
 	private boolean findMcCombatLevel() {

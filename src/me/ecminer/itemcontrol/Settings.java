@@ -1,6 +1,10 @@
 package me.ecminer.itemcontrol;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
@@ -11,76 +15,79 @@ import org.bukkit.entity.Player;
 public class Settings {
 
 	private Map<String, Integer> levels = new HashMap<String, Integer>();
+	private Map<Integer, List<String>> levelItemLookup = new HashMap<Integer, List<String>>();
 	private ItemControl plugin;
 	private String cancelled_armour = "&cYou can't wear %item%, you need to be level &6%level%";
 	private String cancelled_tool = "&cYou can't use a %item%, you need to be level &6%level%";
 	private String cancelled_weapon = "&cYou can't use a %item%, you need to be level &6%level%";
 	private String cancelled_others = "&cYou can't use a %item%, you need to be level &6%level%";
+	private String leveled_up = "&3Congratulations, you reached &6level %level%&3! You can now use %item%!";
+	private String leveled_down = "&cYou were leveled-down to %level%, you can't use %item% anymore!";
 
 	public Settings(ItemControl plugin, FileConfiguration config, FileConfiguration messages) {
 		this.plugin = plugin;
 
 		try {
-			levels.put("leather_helmet", config.getInt("armour.helmet.leather"));
-			levels.put("chainmail_helmet", config.getInt("armour.helmet.chain"));
-			levels.put("gold_helmet", config.getInt("armour.helmet.gold"));
-			levels.put("iron_helmet", config.getInt("armour.helmet.iron"));
-			levels.put("diamond_helmet", config.getInt("armour.helmet.diamond"));
+			addItem("leather_helmet", config.getInt("armour.helmet.leather"));
+			addItem("chainmail_helmet", config.getInt("armour.helmet.chain"));
+			addItem("gold_helmet", config.getInt("armour.helmet.gold"));
+			addItem("iron_helmet", config.getInt("armour.helmet.iron"));
+			addItem("diamond_helmet", config.getInt("armour.helmet.diamond"));
 
-			levels.put("leather_chestplate", config.getInt("armour.chestplate.leather"));
-			levels.put("chainmail_chestplate", config.getInt("armour.chestplate.chain"));
-			levels.put("gold_chestplate", config.getInt("armour.chestplate.gold"));
-			levels.put("iron_chestplate", config.getInt("armour.chestplate.iron"));
-			levels.put("diamond_chestplate", config.getInt("armour.chestplate.diamond"));
+			addItem("leather_chestplate", config.getInt("armour.chestplate.leather"));
+			addItem("chainmail_chestplate", config.getInt("armour.chestplate.chain"));
+			addItem("gold_chestplate", config.getInt("armour.chestplate.gold"));
+			addItem("iron_chestplate", config.getInt("armour.chestplate.iron"));
+			addItem("diamond_chestplate", config.getInt("armour.chestplate.diamond"));
 
-			levels.put("leather_leggings", config.getInt("armour.leggings.leather"));
-			levels.put("chainmail_leggings", config.getInt("armour.leggings.chain"));
-			levels.put("gold_leggings", config.getInt("armour.leggings.gold"));
-			levels.put("iron_leggings", config.getInt("armour.leggings.iron"));
-			levels.put("diamond_leggings", config.getInt("armour.leggings.diamond"));
+			addItem("leather_leggings", config.getInt("armour.leggings.leather"));
+			addItem("chainmail_leggings", config.getInt("armour.leggings.chain"));
+			addItem("gold_leggings", config.getInt("armour.leggings.gold"));
+			addItem("iron_leggings", config.getInt("armour.leggings.iron"));
+			addItem("diamond_leggings", config.getInt("armour.leggings.diamond"));
 
-			levels.put("leather_boots", config.getInt("armour.boots.leather"));
-			levels.put("chainmail_boots", config.getInt("armour.boots.chain"));
-			levels.put("gold_boots", config.getInt("armour.boots.gold"));
-			levels.put("iron_boots", config.getInt("armour.boots.iron"));
-			levels.put("diamond_boots", config.getInt("armour.boots.diamond"));
+			addItem("leather_boots", config.getInt("armour.boots.leather"));
+			addItem("chainmail_boots", config.getInt("armour.boots.chain"));
+			addItem("gold_boots", config.getInt("armour.boots.gold"));
+			addItem("iron_boots", config.getInt("armour.boots.iron"));
+			addItem("diamond_boots", config.getInt("armour.boots.diamond"));
 
-			levels.put("bow", config.getInt("weapons.bow"));
-			levels.put("wood_sword", config.getInt("weapons.wood-sword"));
-			levels.put("stone_sword", config.getInt("weapons.stone-sword"));
-			levels.put("gold_sword", config.getInt("weapons.gold-sword"));
-			levels.put("iron_sword", config.getInt("weapons.iron-sword"));
-			levels.put("diamond_sword", config.getInt("weapons.diamond-sword"));
+			addItem("bow", config.getInt("weapons.bow"));
+			addItem("wood_sword", config.getInt("weapons.wood-sword"));
+			addItem("stone_sword", config.getInt("weapons.stone-sword"));
+			addItem("gold_sword", config.getInt("weapons.gold-sword"));
+			addItem("iron_sword", config.getInt("weapons.iron-sword"));
+			addItem("diamond_sword", config.getInt("weapons.diamond-sword"));
 
-			levels.put("wood_pickaxe", config.getInt("tools.pickaxe.wood"));
-			levels.put("stone_pickaxe", config.getInt("tools.pickaxe.stone"));
-			levels.put("gold_pickaxe", config.getInt("tools.pickaxe.gold"));
-			levels.put("iron_pickaxe", config.getInt("tools.pickaxe.iron"));
-			levels.put("diamond_pickaxe", config.getInt("tools.pickaxe.diamond"));
+			addItem("wood_pickaxe", config.getInt("tools.pickaxe.wood"));
+			addItem("stone_pickaxe", config.getInt("tools.pickaxe.stone"));
+			addItem("gold_pickaxe", config.getInt("tools.pickaxe.gold"));
+			addItem("iron_pickaxe", config.getInt("tools.pickaxe.iron"));
+			addItem("diamond_pickaxe", config.getInt("tools.pickaxe.diamond"));
 
-			levels.put("wood_spade", config.getInt("tools.shovel.wood"));
-			levels.put("stone_spade", config.getInt("tools.shovel.stone"));
-			levels.put("gold_spade", config.getInt("tools.shovel.gold"));
-			levels.put("iron_spade", config.getInt("tools.shovel.iron"));
-			levels.put("diamond_spade", config.getInt("tools.shovel.diamond"));
+			addItem("wood_spade", config.getInt("tools.shovel.wood"));
+			addItem("stone_spade", config.getInt("tools.shovel.stone"));
+			addItem("gold_spade", config.getInt("tools.shovel.gold"));
+			addItem("iron_spade", config.getInt("tools.shovel.iron"));
+			addItem("diamond_spade", config.getInt("tools.shovel.diamond"));
 
-			levels.put("wood_axe", config.getInt("tools.axe.wood"));
-			levels.put("stone_axe", config.getInt("tools.axe.stone"));
-			levels.put("gold_axe", config.getInt("tools.axe.gold"));
-			levels.put("iron_axe", config.getInt("tools.axe.iron"));
-			levels.put("diamond_axe", config.getInt("tools.axe.diamond"));
+			addItem("wood_axe", config.getInt("tools.axe.wood"));
+			addItem("stone_axe", config.getInt("tools.axe.stone"));
+			addItem("gold_axe", config.getInt("tools.axe.gold"));
+			addItem("iron_axe", config.getInt("tools.axe.iron"));
+			addItem("diamond_axe", config.getInt("tools.axe.diamond"));
 
-			levels.put("wood_hoe", config.getInt("tools.hoe.wood"));
-			levels.put("stone_hoe", config.getInt("tools.hoe.stone"));
-			levels.put("gold_hoe", config.getInt("tools.hoe.gold"));
-			levels.put("iron_hoe", config.getInt("tools.hoe.iron"));
-			levels.put("diamond_hoe", config.getInt("tools.hoe.diamond"));
+			addItem("wood_hoe", config.getInt("tools.hoe.wood"));
+			addItem("stone_hoe", config.getInt("tools.hoe.stone"));
+			addItem("gold_hoe", config.getInt("tools.hoe.gold"));
+			addItem("iron_hoe", config.getInt("tools.hoe.iron"));
+			addItem("diamond_hoe", config.getInt("tools.hoe.diamond"));
 
-			levels.put("enchantment_table", config.getInt("others.enchantment-table"));
-			levels.put("workbench", config.getInt("others.crafting-table"));
-			levels.put("anvil", config.getInt("others.anvil"));
-			levels.put(Material.BREWING_STAND.name().toLowerCase(), config.getInt("others.brewing_stand"));
-			levels.put("furnace", config.getInt("others.furnace"));
+			addItem("enchantment_table", config.getInt("others.enchantment-table"));
+			addItem("workbench", config.getInt("others.crafting-table"));
+			addItem("anvil", config.getInt("others.anvil"));
+			addItem(Material.BREWING_STAND.name().toLowerCase(), config.getInt("others.brewing_stand"));
+			addItem("furnace", config.getInt("others.furnace"));
 
 			if (messages.isSet("cancelled-armour")) {
 				cancelled_armour = messages.getString("cancelled-armour");
@@ -94,8 +101,25 @@ public class Settings {
 			if (messages.isSet("cancelled-others")) {
 				cancelled_others = messages.getString("cancelled-others");
 			}
+			if (messages.isSet("leveled-up")) {
+				leveled_up = messages.getString("leveled-up");
+			}
+			if (messages.isSet("leveled-down")) {
+				leveled_down = messages.getString("leveled-down");
+			}
 		} catch (Exception e) {
 		}
+	}
+
+	public void addItem(String name, int level) {
+		levels.put(name, level);
+		if (!levelItemLookup.containsKey(level))
+			levelItemLookup.put(level, new ArrayList<String>());
+		levelItemLookup.get(level).add(name);
+	}
+
+	public Collection<String> getItemsAtLevel(int level) {
+		return levelItemLookup.containsKey(level) ? levelItemLookup.get(level) : Arrays.asList();
 	}
 
 	public int getLevel(Material type) {
@@ -120,6 +144,16 @@ public class Settings {
 	public void sendCancelledOthers(Player player, Material item) {
 		if (item != null)
 			player.sendMessage(ChatColor.translateAlternateColorCodes('&', cancelled_others.replace("%item%", item.name().replace("_", " ").toLowerCase())).replace("%level%", plugin.getSettings().getLevel(item) + ""));
+	}
+
+	public void sendLeveledUp(Player player, int level, String item) {
+		if (item != null)
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', leveled_up.replace("%item%", item).replace("%level%", level + "")));
+	}
+	
+	public void sendLeveledDown(Player player, int level, String item) {
+		if (item != null)
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', leveled_down.replace("%item%", item).replace("%level%", level + "")));
 	}
 
 }
